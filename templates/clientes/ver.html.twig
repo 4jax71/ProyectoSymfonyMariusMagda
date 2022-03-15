@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block body %}
+    <div class="container mt-5 border border-dark rounded p-2">
+        <table class="table table-dark table-striped mb-2 text-center">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="6" >INCIDENCIAS</th>
+                </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if incidencias is not empty %}
+                    {% for i in incidencias%}
+                        <tr>
+                            <th scope="row">{{ i.id }}</th>
+                            <td><a class="btn btn-secondary" href="{{ path("app_clientes_incidencias_ver", {id: i.id}) }}">{{ i.titulo}}</a></td>
+                            <td>{{ i.fecha|date('d-m-Y H:i') }}</td>
+                            <td>{{ i.estado }}</td>
+                            <td>
+                                <a class="btn btn-success" href="{{ path("app_clientes_incidencias_editar", {id: i.id}) }}"><i class="fas fa-pen"></i></a>
+                                <a class="btn btn-danger" href="{{ path("app_clientes_incidencias_borrar", {id: i.id}) }}"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td scope="row" colspan="5" class="text-center">___________________________________</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+        <a href="/clientes" class="btn btn-dark w-100">Volver</a>
+    </div>
+    <div class="m-5 d-flex justify-content-center ">
+        <div class="border border-dark rounded p-2" style="width: 400px" >
+            <h3>{{ cliente.nombre }} {{ cliente.apellidos }}</h3>
+            <div class="border border-dark rounded p-3 my-2">
+                <p class="card-text">Telefono: {{ cliente.telefono }}</p>
+                <p class="card-text">Dirreccion: {{ cliente.direccion }}</p>
+            </div>
+            <a href="{{ path('app_clientes_incidencias_insertar', {id: cliente.id}) }}" class="btn btn-dark w-100 mb-1">Insertar Incidencia</a>
+
+        </div>
+    </div>
+
+{% endblock %}

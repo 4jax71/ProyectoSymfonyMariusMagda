@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block body %}
+    <div class="m-5 d-flex justify-content-center">
+        <form action="{{ path("app_incidencias_insertar") }}" method="POST" class="border border-dark rounded p-2" style="width: 400px" >
+            <div class=" text-center">
+                <h3>Incidencia</h3>
+                <input type="text" id="titulo" name="titulo" placeholder="Título.." class="form-control" required/>
+                <div id="estado" class="form-text text-start ps-1">Estado</div>
+                <select class="form-outline form-select" name="estado" aria-describedby="estado" required>
+                    <option value="Iniciada" selected>Iniciada</option>
+                    <option value="En proceso">En proceso</option>
+                    <option value="Resuelta">Resuelta</option>
+                </select>
+                <div id="cliente" class="form-text text-start ps-1">
+                    Cliente
+                </div>
+                <select class="form-outline form-select" name="cliente" aria-describedby="cliente" required>
+                    {% for c in clientes%}
+                        <option value="{{ c.id }}">{{ c.nombre }} {% if c.apellidos %}{{ c.apellidos }}{% endif %}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" class="btn btn-dark w-100 my-2" value="Insertar">
+                <a href="{{ path('app_incidencias') }}" class="btn btn-dark w-100">Volver</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+

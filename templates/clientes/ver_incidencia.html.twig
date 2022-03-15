@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block body %}
+    <div class="m-5 d-flex justify-content-center  ">
+        <div class="border border-dark rounded p-2">
+            <table class="table table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Título</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">{{ incidencia.id }}</th>
+                        <td>{{ cliente.nombre }} {{ cliente.apellidos }}</td>
+                        <td>{{ incidencia.titulo}}</td>
+                        <td>{{ incidencia.fecha|date('d-m-Y H:i')}}</td>
+                        <td>{{ incidencia.estado}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <a href="{{ path('app_clientes_ver', {id: cliente.id}) }}" class="btn btn-dark w-100">Volver</a>
+        </div>
+    </div>
+{% endblock %}

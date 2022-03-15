@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block body %}
+    <div class="container text-center my-5">
+        <table class="table table-dark table-striped my-2 text-center">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="6" >CLIENTES</th>
+                </tr>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if clientes is not empty %}
+                    {% for c in clientes %}
+                        <tr>
+                            <th scope="row">{{ c.id }}</th>
+                            <td>
+                                <a class="btn btn-secondary" href="{{ path("app_clientes_ver", {id: c.id}) }}">{{ c.nombre }}</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-danger" href="{{ path("app_clientes_borrar", {id: c.id}) }}"><i class="fas fa-trash-alt"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td scope="row" colspan="3" class="text-center">---------------------</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+                <a href="{{ path('app_clientes_insertar') }}" class="btn btn-dark my-3 w-100 display-5"><h1>Insertar cliente</h1></a>
+    </div>
+{% endblock %}

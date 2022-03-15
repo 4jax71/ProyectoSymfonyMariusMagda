@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block body %}
+
+    <div class="m-5 d-flex justify-content-center" width="3000">
+        <form action="{{ path("app_clientes_incidencias_editar", {id: incidencia.id}) }}" method="POST" class="border border-dark rounded p-2" style="width: 400px" >
+            <div class="text-center">
+                <h3>Incidencia</h3>
+                <input type="text" class="form-control my-2" value="{{ cliente.nombre }} {% if cliente.apellidos %}{{ cliente.apellidos }}{% endif %}" readonly />
+                <input type="text" id="titulo" name="titulo" placeholder="Título.." class="form-control" value="{{ incidencia.titulo }}" required/>
+                <div id="estado" class="form-text text-start ps-1">Estado</div>
+                <select class="form-outline form-select" name="estado" aria-describedby="estado" required>
+                    <option value="Iniciada" {% if incidencia.estado == 'Iniciada' %}selected{% endif %}>Iniciada</option>
+                    <option value="En proceso" {% if incidencia.estado == 'En proceso' %}selected{% endif %}>En proceso</option>
+                    <option value="Resuelta" {% if incidencia.estado == 'Resuelta' %}selected{% endif %}>Resuelta</option>
+                </select>
+                <input type="submit" class="btn btn-dark w-100 my-2" value="Editar">
+                <a href="{{ path('app_clientes_ver', {id: cliente.id}) }}" class="btn btn-dark w-100">Volver</a>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+
